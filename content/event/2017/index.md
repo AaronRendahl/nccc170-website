@@ -9,6 +9,13 @@ address:
   country: United States
 authors:
   - "Neil Paton"
+  - "Jason Osborne"
+  - "William Bridges"
+  - "Philip Dixon"
+  - "Kelci Miclaus"
+  - "Alex Lipka"
+  - "John Stevens"
+  - "Kathleen Yeater"
 author_notes:
   - "Site Host"
 date: "2017-06-22"
