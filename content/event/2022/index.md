@@ -11,7 +11,7 @@ address:
 authors: 
   - clarkkogan
   - carlagoad
-  - "Laurence V. Madden"
+  - "Laurence Madden"
   - "Alex Lipka"
   - "Julia Piaskowski"
   - "Phil Alderman"
