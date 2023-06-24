@@ -29,7 +29,7 @@ share: false
 profile: false
 ---
 
-![2023 Attendees](DSC01297.JPG)
+![2023 Attendees](DSC01297sm.jpg)
 
 **Thursday, June 15, 2023**
 

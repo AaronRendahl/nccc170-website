@@ -18,4 +18,4 @@ share: false
 profile: false
 ---
 
-![2019 Attendees](DSC05614.JPG)
+![2019 Attendees](DSC05614sm.jpg)
