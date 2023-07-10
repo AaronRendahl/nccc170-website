@@ -91,6 +91,7 @@ make_list <- function(x, n) {
 
 add_types <- function(x) {
   x[[1]]$yaml$type <- "meeting"
+  x[[1]]$yaml$view <- "schedule"
   for(idx in 2:length(x)) {
     x[[idx]]$yaml$type <- "talk"
   }
@@ -155,13 +156,14 @@ write_meeting <- function(m, outdir, verbose=TRUE) {
   }
 }
 
-alist <- readxl::read_excel("static/data/authorlist.xlsx") |>
+alist <- read_csv("static/data/authorlist.csv") |>
   filter(!is.na(name)) |>
   mutate(code=if_else(is.na(code), name, code))
 years <- list.files("static/data", pattern=".txt$") |> str_remove(".txt$")
 ms <- lapply(years, function(y) {
   m <- read_meeting(sprintf("static/data/%s.txt", y), authorlist=alist)
   outdir <- sprintf("content/event/%s", y)
+  if(!file.exists(outdir)) dir.create(outdir)
   file.remove(list.files(outdir, pattern="*.md", full.names = TRUE))
   write_meeting(m, outdir)
   m
@@ -170,3 +172,6 @@ ms <- lapply(years, function(y) {
 # a <- lapply(ms, function(m) lapply(m, function(x) x$yaml$authors)) |> unlist() |> unname()
 # list.files("content/authors/")
 
+figs <- list.files("static/data", pattern=".jpg")
+file.copy(file.path("static/data", figs),
+          paste0("content/event/", str_replace(figs, ".jpg", "/featured.jpg")))
