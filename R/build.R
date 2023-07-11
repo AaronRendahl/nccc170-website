@@ -155,6 +155,12 @@ write_meeting <- function(m, outdir, verbose=TRUE) {
   }
 }
 
+tolist <- function(x) {
+  x <- unname(x)
+  if(length(x)==1) { x <- list(x) }
+  x
+}
+
 alist <- read_csv("static/data/authorlist.csv") |>
   filter(!is.na(name)) |>
   mutate(code=if_else(is.na(code), name, code))
@@ -165,7 +171,12 @@ ms <- lapply(years, function(y) {
   if(!file.exists(outdir)) dir.create(outdir)
   file.remove(list.files(outdir, pattern="*.md", full.names = TRUE))
   write_meeting(m, outdir)
-  m
+  for(n in names(m[[1]]$yaml$people)) {
+    f <- n |> str_remove("[^A-Za-z]") |> tolower()
+    p <- m[[1]]$yaml$people[[n]]
+    y <- list(title=n, authors=tolist(p), date=m[[1]]$yaml$date, type="role")
+    write_yaml(list(yaml=y), file=f, dir=outdir, verbose=TRUE)
+  }
 })
 
 # a <- lapply(ms, function(m) lapply(m, function(x) x$yaml$authors)) |> unlist() |> unname()
