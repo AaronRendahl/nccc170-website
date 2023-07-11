@@ -1,0 +1,96 @@
+{{ $page := . }}
+{{ $featured := partial "functions/get_featured_image.html" $page }}
+
+{{ $anchor := $page.Params.image.focal_point | default "Smart" }}
+
+{{/* Set default titles for node pages */}}
+{{ $title := .Title }}
+
+{{/* Banner image */}}
+{{ if and .Params.banner.image (not (and $featured (not .Params.image.preview_only))) }}
+<div class="article-header">
+  {{- $img := "" -}}
+  {{ $alt := (.Params.banner.caption | default "") | plainify }}
+  {{ $destination := .Params.banner.image }}
+  {{ $is_remote := strings.HasPrefix $destination "http" }}
+  {{- if not $is_remote -}}
+    {{- $img = (.Page.Resources.ByType "image").GetMatch $destination -}}
+    {{- if not $img -}}
+      {{- $img = resources.Get (path.Join "media" $destination) -}}
+    {{- end -}}
+  {{- end -}}
+  {{ if $img }}
+    <img src="{{$img.RelPermalink}}" width="{{$img.Width}}" height="{{$img.Height}}" class="article-banner" alt="{{$alt}}">
+  {{ else }}
+    <img src="{{ .Params.banner.image }}" class="article-banner" alt="{{$alt}}">
+  {{ end }}
+
+  {{ with .Params.banner.caption }}<span class="article-header-caption">{{ . | markdownify | emojify }}</span>{{ end }}
+</div>
+{{end}}
+
+<div class="article-container pt-3">
+  <h1>{{ $title }}</h1>
+
+{{/* FROM EVENT/SINGLE */}}
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-10">
+        <div class="row">
+          <div class="col-12 col-md-3 pub-row-heading">{{ i18n "date" }}</div>
+          <div class="col-12 col-md-9">
+            {{ partial "functions/get_event_dates" . }}
+          </div>
+        </div>
+      </div>
+      <div class="col-md-1"></div>
+    </div>
+    <div class="d-md-none space-below"></div>
+
+    {{ if .Params.location }}
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-10">
+        <div class="row">
+          <div class="col-12 col-md-3 pub-row-heading">{{ i18n "location" }}</div>
+          <div class="col-12 col-md-9">{{ .Params.location | markdownify }}</div>
+          {{ if .Params.address }}
+            <div class="col-md-3"></div>
+            <div class="col-12 col-md-9">{{partial "functions/get_address" (dict "root" . "address" .Params.address) }}</div>
+          {{end}}
+        </div>
+      </div>
+      <div class="col-md-1"></div>
+    </div>
+    <div class="d-md-none space-below"></div>
+    {{ end }}
+    
+</div>
+
+
+{{/* Featured image */}}
+{{ if and $featured (not .Params.image.preview_only) }}
+{{/* Fit image within max size. */}}
+{{ $image := $featured }}
+{{/* Determine image placement. */}}
+{{ $placement := .Params.image.placement | default 1 }}{{/* Default to full column width. */}}
+{{/* Fit image to container's max width */}}
+{{ $image_container := "" }}
+{{ if eq $placement 2}}
+  {{ $image_container = "container" }}
+  {{ $image = $featured.Fit "1200x2500 webp" }}
+{{else if eq $placement 3}}
+  {{ $image_container = "container-fluid" }}
+  {{ $image := $featured.Fit "2560x2560 webp" }}
+{{else}}
+  {{ $image_container = "article-container" }}
+  {{ $image = $featured.Fit "720x2500 webp" }}
+{{end}}
+
+<div class="article-header {{$image_container}} featured-image-wrapper mt-4 mb-4" style="max-width: {{$image.Width}}px; max-height: {{$image.Height}}px;">
+  <div style="position: relative">
+    <img src="{{ $image.RelPermalink }}" width="{{ $image.Width }}" height="{{ $image.Height }}" alt="{{ with $.Params.image.alt_text }}{{.}}{{ end }}" class="featured-image">
+    {{ with $.Params.image.caption }}<span class="article-header-caption">{{ . | markdownify | emojify }}</span>{{ end }}
+  </div>
+</div>
+{{end}}

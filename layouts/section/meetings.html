@@ -1,0 +1,36 @@
+{{- define "main" -}}
+
+{{ if eq .Type "meeting"}}
+  {{ partial "meeting_header.html" . }}
+{{ else }}
+  {{ partial "page_header.html" . }}
+{{ end }}
+
+<div class="pub">
+<div class="article-container">
+
+  {{ with .Content }}
+    <div class="article-style">{{ . }}</div>
+  {{ end }}
+
+  {{/* ----- List meetings ----- */}}
+  {{ $query := where .Pages  ".Type" "eq" "meeting" }}
+  {{ range $query}}
+    {{ partial "functions/render_view" (dict "page" $ "item" . "view" ($.Params.view | default "compact") ) }}
+  {{ end }}
+
+  {{/* ----- List talks ----- */}}
+  {{ $query := where .Pages  ".Type" "eq" "talk" }}
+  {{ range ($query.GroupByDate "2006-01-02").Reverse }}
+    <p><strong>{{ time.Format "Monday, January 2, 2006" (time .Key) }}</strong></p>
+    <div class="schedule">
+      {{ range $index, $item := .Pages.Reverse }}
+        {{ partial "functions/render_view" (dict "page" $ "item" . "view" ($.Params.view | default "compact") ) }}
+      {{ end }}
+    </div>
+  {{ end }}
+  
+</div>
+</div>
+
+{{- end -}}
