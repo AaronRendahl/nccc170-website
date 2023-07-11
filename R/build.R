@@ -106,8 +106,7 @@ find_authors <- function(m, authorlist) {
   if(length(a)==0) yaml$authors <- NULL else yaml$authors <- a
   for(idx in seq_len(nrow(authorlist))) {
     x <- x |> str_replace(fixed(authorlist$name[idx]), 
-                          fixed(sprintf('{{%% mention "%s" "%s" %%}}',
-                                  #'mention %s "%s"',
+                          fixed(sprintf('{{%% mention_name "%s" "%s" %%}}',
                                   authorlist$code[idx], authorlist$name[idx]))
     )
   }
