@@ -172,5 +172,9 @@ ms <- lapply(years, function(y) {
 # list.files("content/authors/")
 
 figs <- list.files("static/data", pattern=".jpg")
-file.copy(file.path("static/data", figs),
-          paste0("content/meetings/", str_replace(figs, ".jpg", "/featured.jpg")))
+message("Copying image files...")
+for(fig in figs) {
+  message(sprintf(" - %s", fig))
+  file.copy(file.path("static/data", fig),
+            paste0("content/meetings/", str_replace(fig, ".jpg", "/featured.jpg")))
+}
