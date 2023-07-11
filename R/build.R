@@ -161,7 +161,7 @@ alist <- read_csv("static/data/authorlist.csv") |>
 years <- list.files("static/data", pattern=".txt$") |> str_remove(".txt$")
 ms <- lapply(years, function(y) {
   m <- read_meeting(sprintf("static/data/%s.txt", y), authorlist=alist)
-  outdir <- sprintf("content/event/%s", y)
+  outdir <- sprintf("content/meetings/%s", y)
   if(!file.exists(outdir)) dir.create(outdir)
   file.remove(list.files(outdir, pattern="*.md", full.names = TRUE))
   write_meeting(m, outdir)
@@ -173,4 +173,4 @@ ms <- lapply(years, function(y) {
 
 figs <- list.files("static/data", pattern=".jpg")
 file.copy(file.path("static/data", figs),
-          paste0("content/event/", str_replace(figs, ".jpg", "/featured.jpg")))
+          paste0("content/meetings/", str_replace(figs, ".jpg", "/featured.jpg")))
