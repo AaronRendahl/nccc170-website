@@ -1,0 +1,20 @@
+{{ $left  := index . 0 }}
+{{ $right := index . 1 }}
+{{ $more  := index . 2 }}
+
+{{/* FROM EVENT/SINGLE */}}
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-10">
+        <div class="row">
+          <div class="col-12 col-md-3 pub-row-heading">{{ $left }}</div>
+          <div class="col-12 col-md-9">{{ $right }}</div>
+          {{ with $more }}
+            <div class="col-md-3"></div>
+            <div class="col-12 col-md-9">{{ . }}</div>
+          {{end}}
+        </div>
+      </div>
+      <div class="col-md-1"></div>
+    </div>
+    <div class="d-md-none space-below"></div>

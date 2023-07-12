@@ -32,39 +32,32 @@
 <div class="article-container pt-3">
   <h1>{{ $title }}</h1>
 
-{{/* FROM EVENT/SINGLE */}}
-    <div class="row">
-      <div class="col-md-1"></div>
-      <div class="col-md-10">
-        <div class="row">
-          <div class="col-12 col-md-3 pub-row-heading">{{ i18n "date" }}</div>
-          <div class="col-12 col-md-9">
-            {{ partial "functions/get_event_dates" . }}
-          </div>
-        </div>
-      </div>
-      <div class="col-md-1"></div>
-    </div>
-    <div class="d-md-none space-below"></div>
+  {{ $date1 := (i18n "date")}}
+  {{ $date2 := partial "functions/get_event_dates" . }}
+  {{ partial "info.html" (slice $date1 $date2) }} 
 
-    {{ if .Params.location }}
-    <div class="row">
-      <div class="col-md-1"></div>
-      <div class="col-md-10">
-        <div class="row">
-          <div class="col-12 col-md-3 pub-row-heading">{{ i18n "location" }}</div>
-          <div class="col-12 col-md-9">{{ .Params.location | markdownify }}</div>
-          {{ if .Params.address }}
-            <div class="col-md-3"></div>
-            <div class="col-12 col-md-9">{{partial "functions/get_address" (dict "root" . "address" .Params.address) }}</div>
-          {{end}}
-        </div>
-      </div>
-      <div class="col-md-1"></div>
-    </div>
-    <div class="d-md-none space-below"></div>
-    {{ end }}
-    
+  {{ if .Params.location }}
+  {{ $location1 := i18n "location" }}
+  {{ $location2 := .Params.location | markdownify }}
+  {{ $location3 := partial "functions/get_address" (dict "root" . "address" .Params.address) }}
+  {{ partial "info.html" (slice $location1 $location2 $location3) }} 
+  {{ end }}
+  
+  {{ with .Params.people.program_chair }}
+  {{ $who := delimit . "<br>" }}
+  {{ partial "info.html" (slice "Program Chair" ($who | markdownify))}}
+  {{ end }}  
+  
+  {{ with .Params.people.site_host }}
+  {{ $who := delimit . "<br>" }}
+  {{ partial "info.html" (slice "Site Host" ($who | markdownify))}}
+  {{ end }}
+  
+  {{ with .Params.people.participants }}
+  {{ $who := delimit . ", " }}
+  {{ partial "info.html" (slice "Participants" ($who | markdownify))}}
+  {{ end }}  
+  
 </div>
 
 
