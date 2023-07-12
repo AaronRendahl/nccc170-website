@@ -12,8 +12,6 @@ people:
   who: Aaron Rendahl, University of Minnesota
 - role: Participant
   who:
-    - "Nick Keuler"
-    - "Aaron Rendahl"
     - "Philip Dixon"
     - "Samuel Fernandes"
     - "Jarad Niemi"
@@ -23,6 +21,8 @@ people:
     - "Steven Moen"
     - "Dan Runcie"
     - "Julia Piaskowski"
+    - Nora Bello
+    - Bruce Craig
 
 date: 2023-06-15
 
@@ -31,7 +31,7 @@ title: From Biometry to Statistics Collaboration at UW-Madison
 authors: Brian Yandell, Director, Biometry Program, University of Wisconsin-Madison
 
 time: 9:15a
-title: Estimating Genetic Gain -- Why the Right Type of BLUP Matters
+title: Estimating Genetic Gain — Why the Right Type of BLUP Matters
 authors: Philip Dixon, Iowa State University
 ---
 Plant breeding is one of many reasons for the huge increase in corn yields from 1920 to now.  However, there are many confounding factors, including changes in weather, increased fertilization, better weed control, and growing corn at a higher density (# plants / acre).  Don Duvick, of Pioneer Hy-Bred / Corteva, popularized the eRa study design to estimate the contribution due to plant breeding.  Seeds from genotypes released in different years are planted in the same year and site, at the same density, and with the same amounts of fertilization and weed control.  Any observed differences among the genotypes can then be attributed to genetic gain.  An extension of this design is to plant genotypes at both the current density, e.g., 35,000 seeds per acre, and the density when released, e.g., 20,000 seeds per acre or 25,000 seeds per acre.

@@ -1,8 +1,9 @@
 
 title: 2017 NCCC170 Annual Meeting
-location: Cargill Innovation Campus, Elk River, Minnesota
+location: Cargill Innovation Campus, Minnesota
 address:
-  city: 10383 165th Ave NW
+  street: 10383 165th Ave NW
+  city: Elk River
   region: MN
   postcode: "55330"
   country: United States

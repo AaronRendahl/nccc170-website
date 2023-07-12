@@ -20,6 +20,7 @@ people:
   - "Huizi Wang"
   - Aaron Rendahl
   - Jarad Niemi
+  - Nora Bello
   - Bruce Craig
 ---
 
