@@ -167,6 +167,7 @@ alist <- read_csv("static/data/authorlist.csv") |>
 years <- list.files("static/data", pattern=".txt$") |> str_remove(".txt$")
 ms <- lapply(years, function(y) {
   m <- read_meeting(sprintf("static/data/%s.txt", y), authorlist=alist)
+  p.active <- lapply(m, function(x) x$yaml$authors) |> unlist() |> unname()
   outdir <- sprintf("content/meetings/%s", y)
   if(!file.exists(outdir)) dir.create(outdir)
   file.remove(list.files(outdir, pattern="*.md", full.names = TRUE))
@@ -174,7 +175,11 @@ ms <- lapply(years, function(y) {
     p <- m[[1]]$yaml$people[[idx]]
     file <- p$role |> str_remove("[^A-Za-z]") |> tolower()
     yi <- list(yaml=list(title=p$role, authors=p$who, date=m[[1]]$yaml$date, type="role")) |>
-      find_authors(alist) |> make_list(c("authors", "authorlist"))
+      find_authors(alist)
+    if(p$role == "Participant") {
+      yi$yaml$authors <- setdiff(yi$yaml$authors, p.active)
+    }
+    yi <- yi |> make_list(c("authors", "authorlist"))
     write_yaml(yi, file=file, dir=outdir, verbose=TRUE)
     m[[1]]$yaml$people[[idx]]$who <- yi$yaml$authorlist
   }
