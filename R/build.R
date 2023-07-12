@@ -170,13 +170,16 @@ ms <- lapply(years, function(y) {
   outdir <- sprintf("content/meetings/%s", y)
   if(!file.exists(outdir)) dir.create(outdir)
   file.remove(list.files(outdir, pattern="*.md", full.names = TRUE))
-  write_meeting(m, outdir)
-  for(n in names(m[[1]]$yaml$people)) {
-    f <- n |> str_remove("[^A-Za-z]") |> tolower()
-    p <- m[[1]]$yaml$people[[n]]
-    y <- list(title=n, authors=tolist(p), date=m[[1]]$yaml$date, type="role")
-    write_yaml(list(yaml=y), file=f, dir=outdir, verbose=TRUE)
+  for(idx in seq_along(m[[1]]$yaml$people)) {
+    p <- m[[1]]$yaml$people[[idx]]
+    file <- p$role |> str_remove("[^A-Za-z]") |> tolower()
+    yi <- list(yaml=list(title=p$role, authors=p$who, date=m[[1]]$yaml$date, type="role")) |>
+      find_authors(alist) |> make_list(c("authors", "authorlist"))
+    write_yaml(yi, file=file, dir=outdir, verbose=TRUE)
+    m[[1]]$yaml$people[[idx]]$who <- yi$yaml$authorlist
   }
+  write_meeting(m, outdir)
+  m
 })
 
 # a <- lapply(ms, function(m) lapply(m, function(x) x$yaml$authors)) |> unlist() |> unname()
