@@ -43,20 +43,13 @@
   {{ partial "info.html" (slice $location1 $location2 $location3) }} 
   {{ end }}
   
-  {{ with .Params.people.program_chair }}
-  {{ $who := delimit . "<br>" }}
-  {{ partial "info.html" (slice "Program Chair" ($who | markdownify))}}
-  {{ end }}  
-  
-  {{ with .Params.people.site_host }}
-  {{ $who := delimit . "<br>" }}
-  {{ partial "info.html" (slice "Site Host" ($who | markdownify))}}
+  {{ range $index, $roles := .Params.people }}
+    {{ $sep := ", "}}
+    {{ if le (len .who) 3 }} {{ $sep = "<br>" }} {{ end }}
+    {{ $role := .role }}
+    {{ if gt (len .who) 1 }} {{ $role = printf "%ss" $role }} {{ end }}
+    {{ partial "info.html" (slice $role ((delimit .who ", ") | markdownify)) }}
   {{ end }}
-  
-  {{ with .Params.people.participants }}
-  {{ $who := delimit . ", " }}
-  {{ partial "info.html" (slice "Participants" ($who | markdownify))}}
-  {{ end }}  
   
 </div>
 
