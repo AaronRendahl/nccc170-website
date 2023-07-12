@@ -7,9 +7,10 @@ address:
   postcode: "55330"
   country: United States
 people:
-  Site Host:
-  - "Neil Paton"
-  Participants:
+- role: Site Host
+  who: "Neil Paton"
+- role: Participant
+  who:
   - "Jason Osborne"
   - "William Bridges"
   - "Philip Dixon"

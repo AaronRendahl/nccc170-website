@@ -4,21 +4,22 @@ address:
   street: 133 Service Memorial Institute (SMI)
   city: Madison
   region: WI
-  postcode: 53703
+  postcode: "53703"
 people:
-  Site Host:
-    - nicholaskeuler
-  Program Chair: 
-    - aaronrendahl
-  Participants: 
-    - nicholaskeuler
-    - aaronrendahl
+- role: Site Host
+  who: Nick Keuler, University of Wisconsin
+- role: Program Chair
+  who: Aaron Rendahl, University of Minnesota
+- role: Participant
+  who:
+    - "Nick Keuler"
+    - "Aaron Rendahl"
     - "Philip Dixon"
     - "Samuel Fernandes"
-    - jaradniemi
-    - carlagoad
+    - "Jarad Niemi"
+    - "Carla Goad"
     - "John Stevens"
-    - clarkkogan
+    - "Clark Kogan"
     - "Steven Moen"
     - "Dan Runcie"
     - "Julia Piaskowski"

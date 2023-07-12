@@ -1,4 +1,3 @@
-
 title: 2018 NCCC170 Annual Meeting
 location: University of Arkansas, Fayetteville
 address:
@@ -8,23 +7,24 @@ address:
   postcode: "72704"
   country: United States
 people:
-  Site Host:
-  - Ed Gbur
-  Program Chair:
-  - "John Stevens"
-  Participants:
+- role: Site Host
+  who: "Ed Gbur"
+- role: Program Chair
+  who: "John Stevens"
+- role: Participant
+  who:
   - "Alex Lipka"
-  - norabello
+  - "Nora Bello"
   - "JungAe Lee-Bartlett"
   - "Raul Macchiavelli"
-  - "Rob Tempelmen"
+  - "Rob Tempelman"
   - "Laurence Madden"
   - "Bruce Craig"
   - "Susan Durham"
   - "Edzard van Santen"
   - "Matt Kramer"
   - "Walt Stroup"
-  - nicholaskeuler
+  - "Nick Keuler"
   - "Jun Zhu"
 
 date: 2018-06-28

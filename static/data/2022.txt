@@ -7,19 +7,20 @@ address:
   region: OK
   street: 301 Math Sciences Building
 people:
-  Site Host:
-    - carlagoad
-  Program Chair: 
-    - clarkkogan
-  Participants: 
+- role: Site Host
+  who: Carla Goad
+- role: Program Chair
+  who: Clark Kogan
+- role: Participant
+  who:
   - "Laurence Madden"
   - "Alex Lipka"
   - "Julia Piaskowski"
   - "Phil Alderman"
   - "Huizi Wang"
-  - aaronrendahl
-  - jaradniemi
-  - brucecraig
+  - Aaron Rendahl
+  - Jarad Niemi
+  - Bruce Craig
 ---
 
 date: 2022-06-16
